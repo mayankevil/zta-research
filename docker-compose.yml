@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - opa
+      - envoy
+    environment:
+      - FLASK_ENV=development
+
+  opa:
+    build:
+      context: ./opa
+    ports:
+      - "8181:8181"
+    command: ["run", "--server", "--addr", "0.0.0.0:8181", "/policy"]
+
+  envoy:
+    build:
+      context: ./envoy
+    ports:
+      - "9901:9901"
+      - "10000:10000"
+

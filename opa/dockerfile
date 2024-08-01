@@ -1,0 +1,9 @@
+FROM openpolicyagent/opa:0.67.0
+
+COPY example.rego /policy/example.rego
+
+CMD ["run", "--server", "--addr", "0.0.0.0:8181", "/policy"]
+
+#FROM openpolicyagent/opa:latest
+
+#COPY example.rego /opa/policies/
